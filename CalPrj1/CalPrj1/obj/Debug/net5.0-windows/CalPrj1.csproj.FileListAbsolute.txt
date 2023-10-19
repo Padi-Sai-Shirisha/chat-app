@@ -1,0 +1,17 @@
+C:\Users\user\source\repos\CalPrj1\CalPrj1\bin\Debug\net5.0-windows\CalPrj1.exe
+C:\Users\user\source\repos\CalPrj1\CalPrj1\bin\Debug\net5.0-windows\CalPrj1.deps.json
+C:\Users\user\source\repos\CalPrj1\CalPrj1\bin\Debug\net5.0-windows\CalPrj1.runtimeconfig.json
+C:\Users\user\source\repos\CalPrj1\CalPrj1\bin\Debug\net5.0-windows\CalPrj1.runtimeconfig.dev.json
+C:\Users\user\source\repos\CalPrj1\CalPrj1\bin\Debug\net5.0-windows\CalPrj1.dll
+C:\Users\user\source\repos\CalPrj1\CalPrj1\bin\Debug\net5.0-windows\CalPrj1.pdb
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.Form1.resources
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.csproj.GenerateResource.cache
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.AssemblyInfo.cs
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.dll
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\refint\CalPrj1.dll
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.pdb
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\CalPrj1.genruntimeconfig.cache
+C:\Users\user\source\repos\CalPrj1\CalPrj1\obj\Debug\net5.0-windows\ref\CalPrj1.dll
