@@ -454,3 +454,42 @@ html, body {
     
  //    return userMessages;
  //}
+
+
+
+
+
+============================
+
+
+
+ constructor(private chat: ChatService) {
+    this.messages = JSON.parse(localStorage.getItem('messages') || '[]');
+  }
+
+  ngOnInit() { }
+
+  // other methods...
+
+  onSend() {
+    this.chat.getPosts2(this.uname, this.rname, this.msg).subscribe((stat: any) => {
+      this.status2 = stat;
+      console.log(stat);
+      if (stat !== 'Receiver does not exist.') {
+        const newMessage = {
+          sender: this.uname,
+          receiver: this.rname,
+          text: this.msg,
+        };
+        this.messages.push(newMessage);
+        localStorage.setItem('messages', JSON.stringify(this.messages));
+      }
+      this.rname = '';
+      this.msg = '';
+    });
+  }
+
+  onLogout() {
+    this.isLoggedIn = false;
+    this.status = "";
+  
