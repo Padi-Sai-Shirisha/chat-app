@@ -1,0 +1,1 @@
+Data Source=DESKTOP-O7LF2JA;Initial Catalog=training;Integrated Security=True
