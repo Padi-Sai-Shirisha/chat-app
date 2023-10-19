@@ -1,0 +1,391 @@
+import { Component, OnInit } from '@angular/core';
+import { ChatService } from './chat.service';
+import { HttpClientModule } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit{
+  public status: string="";
+  public uname: string = "";
+  public pass: string = "";
+  public name: string = "";
+  public rname: string = "";
+  public msg: string = "";
+  public isRegister: boolean = false;
+  public isLoggedIn: boolean = false;
+  public messages: any[] = []; 
+  public currentUser: string = ""; 
+  public status1: string = "";
+  public status2: string = "";
+
+  constructor(private chat: ChatService) { }
+
+  ngOnInit() { }
+
+  onRegister() {
+    this.chat.getPosts1(this.name, this.uname, this.pass).subscribe((stat: any) => {
+      this.status1 = stat;
+      console.log(stat);
+    });
+  }
+
+  onLogin() {
+    this.chat.getPosts(this.uname, this.pass).subscribe((stat: any) => {
+      this.status = stat;
+      if(this.status == "Login successful")
+      {
+        this.isLoggedIn = true;
+      }
+      console.log(stat);
+      this.uname = "";
+      this.pass = "";
+     
+      
+    });
+    this.status="";
+  }
+
+  toggleForm() {
+    this.isRegister = !this.isRegister;
+    this.name = "";
+    this.uname = "";
+    this.pass = "";
+  }
+
+  onSend() {
+    this.chat.getPosts2(this.uname, this.rname, this.msg).subscribe((stat: any) => {
+      this.status2 = stat;
+      console.log(stat);
+      // if (stat !== 'Receiver does not exist.') {
+      //   this.messages.push({
+      //     sender: senderId,
+      //     receiver: this.rname,
+      //     text: this.msg,
+      //   });
+      // }
+      // this.rname = '';
+      // this.msg = '';
+    });
+  }
+  
+  onLogout() {
+    this.isLoggedIn = false;
+    this.status = "";
+  }
+
+}
+
+// import { Component, OnInit } from '@angular/core';
+// import { ChatService } from './chat.service';
+// import { HttpClientModule } from '@angular/common/http';
+
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: './app.component.html',
+//   styleUrls: ['./app.component.css']
+// })
+// export class AppComponent implements OnInit{
+//   public status: string="";
+//   public uname: string = "";
+//   public pass: string = "";
+//   public name: string = "";
+//   public rname: string = "";
+//   public msg: string = "";
+//   public isRegister: boolean = false;
+//   public isLoggedIn: boolean = false;
+//   public status1: string = "";
+//   public status2: string = "";
+
+
+
+//   constructor(private chat: ChatService) { }
+
+//   ngOnInit() { }
+
+//   onRegister() {
+//     this.chat.getPosts1(this.name, this.uname, this.pass).subscribe((stat: any) => {
+//       this.status1 = stat;
+//       console.log(stat);
+//     });
+//   }
+
+//   onLogin() {
+//     this.chat.getPosts(this.uname, this.pass).subscribe((stat: any) => {
+//       this.status = stat;
+//       if(this.status == "Login successful")
+//       {
+//         this.isLoggedIn = true;
+//       }
+//       console.log(stat);
+//     });
+//   }
+
+//   toggleForm() {
+//     this.isRegister = !this.isRegister;
+//     this.name = "";
+//     this.uname = "";
+//     this.pass = "";
+//   }
+
+//   onSend() {
+//     this.chat.getPosts2(this.uname, this.rname, this.msg).subscribe((stat: any) => {
+//       this.status2 = stat;
+//       console.log(stat);
+//     });
+//   }
+
+//   onLogout() {
+//     this.isLoggedIn = false;
+//     this.status = "";
+//     this.status1="";
+//     this.status2="";
+//   }
+
+// }
+
+
+
+
+
+
+
+===========================================================
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat App</title>
+</head>
+<body>
+  <div class="background-container">
+ 
+ <div class="container" *ngIf="isLoggedIn">
+  <h2 style="text-align: center; font-size: 25px; padding-bottom: 5px; font-family: Cursive;">Do time pass</h2>
+  <h4 style="font-weight: lighter; font-family: Cursive;">{{status2}}</h4>
+  <!-- <div class="chatbox">
+    <div class="message" *ngFor="let message of messages">
+      <div class="sender" *ngIf="message.sender !== currentUser">{{ message.sender }}</div>
+      <div class="receiver" *ngIf="message.sender === currentUser">{{ message.receiver }}</div>
+      <div class="text">{{ message.text }}</div>
+    </div>
+  </div> -->
+  <form (ngSubmit)="onSend()" class="input-form">
+    Receiver Username:
+    <input type="text" id="rname" name="rname" [(ngModel)]="rname"><br><br>
+    Message:
+    <input type="text" id="msg" name="msg" [(ngModel)]="msg"><br><br>
+    <button type="submit">Send</button><br><br>
+  </form>
+  <button (click)="onLogout()" class="logout-button">Log out</button>
+</div>
+
+<div class="container" *ngIf="!isLoggedIn">
+  <div *ngIf="isRegister" class="form-container">
+    <h2>Register to Connect</h2>
+   <h4 style="font-weight: lighter; font-family: Cursive;">{{status1}}</h4>
+   <form (ngSubmit)="onRegister()">
+     Name:
+     <input type="text" id="name" name="name" [(ngModel)]="name"><br><br>
+     Username:
+     <input type="text" id="uname" name="uname" [(ngModel)]="uname"><br><br>
+     Password:
+     <input type="text" id="pass" name="pass" [(ngModel)]="pass"><br><br>
+     <button type="submit" style="display: block; margin: 0 auto;">Register</button><br><br>
+  </form>
+  <button (click)="toggleForm()" class="login-button">Login</button>
+</div>
+
+  <div *ngIf="!isRegister" class="form-container">
+    <h2 style="text-align: center; font-size: 25px;">Try Chat</h2>
+    <h4>{{status}}</h4>
+    <form (ngSubmit)="onLogin()">
+      Username:
+      <input type="text" id="uname" name="uname" [(ngModel)]="uname"><br><br>
+      Password:
+      <input type="text" id="pass" name="pass" [(ngModel)]="pass"><br><br>
+      <button type="submit" style="display: block; margin: 0 auto;">Login</button><br><br>
+    </form>
+    <button (click)="toggleForm()">Register</button>
+  </div>
+</div>
+
+
+</div>
+</body>
+</html>
+
+<!-- 
+<div *ngIf="isLoggedIn">
+  <h2>Chat</h2>
+  <h4>{{status}}</h4>
+  <form (ngSubmit)="onSend()">
+    Receiver Username:
+    <input type="text" id="rname" name="rname" [(ngModel)]="rname"><br><br>
+    Message:
+    <input type="text" id="msg" name="msg" [(ngModel)]="msg"><br><br>
+    <button type="submit">Send</button><br><br>
+  </form>
+  <button (click)="onLogout()">Log out</button>
+</div>
+
+<div *ngIf="!isLoggedIn">
+  <div *ngIf="isRegister">
+    <h2>Register Form</h2>
+    <h4>{{status}}</h4>
+    <form (ngSubmit)="onRegister()">
+      Name:
+      <input type="text" id="name" name="name" [(ngModel)]="name"><br><br>
+      Username:
+      <input type="text" id="uname" name="uname" [(ngModel)]="uname"><br><br>
+      Password:
+      <input type="text" id="pass" name="pass" [(ngModel)]="pass"><br><br>
+      <button type="submit">Register</button><br><br>
+    </form>
+    <button (click)="toggleForm()">Login</button>
+  </div>
+
+  <div *ngIf="!isRegister">
+    <h2>Login Form</h2>
+    <form (ngSubmit)="onLogin()">
+      Username:
+      <input type="text" id="uname" name="uname" [(ngModel)]="uname"><br><br>
+      Password:
+      <input type="text" id="pass" name="pass" [(ngModel)]="pass"><br><br>
+      <button type="submit">Login</button><br><br>
+    </form>
+    <button (click)="toggleForm()">Register</button>
+  </div>
+</div>
+
+<h4>{{status}}</h4> -->
+
+
+
+
+
+=====================================================
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .background-container {
+    background-image: url("../../images/bg.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8; 
+  }
+  
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(70, 152, 219);
+    width: 30%;
+    height: 70%; 
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .chatbox {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 20px;
+    width: 50%;
+    height: 35%;
+    overflow-y: scroll;
+    margin-bottom: 20px;
+  }
+  
+  .message {
+    margin-bottom: 10px;
+  }
+  
+  .sender {
+    background-color: #eff6ff;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .receiver {
+    background-color: #dcf8c6;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .text {
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .input-form {
+    display: flex;
+    flex-direction: column;
+    font-family: Cursive;
+  }
+  
+  .logout-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    font-family: Cursive;
+  }
+  
+  button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Cursive;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+
