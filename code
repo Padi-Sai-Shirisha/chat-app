@@ -389,3 +389,68 @@ html, body {
   }
 
 
+
+====================================================
+
+
+ //public static Dictionary<string, List<(string message, string status, string userId)>> GetUserMessages(string uname)
+ //{
+ //    Dictionary<string, List<(string, string, string)>> userMessages = new Dictionary<string, List<(string, string, string)>>();
+
+ //    try
+ //    {
+ //        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-O7LF2JA;Initial Catalog=training;Integrated Security=True");
+ //        con.Open();
+
+ //        // Fetch sent messages
+ //        SqlCommand sentCmd = new SqlCommand($"SELECT receiver_id, msgs, msg_time FROM messageTbl WHERE sender_id = '{uname}'", con);
+ //        SqlDataReader sentRdr = sentCmd.ExecuteReader();
+ //        while (sentRdr.Read())
+ //        {
+ //            string receiverId = sentRdr.GetString(0);
+ //            string message = sentRdr.GetString(1);
+ //            DateTime time = sentRdr.GetDateTime(2);
+
+            
+ //        // Fetch received messages
+ //        SqlCommand receivedCmd = new SqlCommand($"SELECT sender_id, msgs, msg_time FROM messageTbl WHERE receiver_id = '{uname}'", con);
+ //        SqlDataReader receivedRdr = receivedCmd.ExecuteReader();
+ //        while (receivedRdr.Read())
+ //        {
+ //            string senderId = receivedRdr.GetString(0);
+ //            string message = receivedRdr.GetString(1);
+ //            DateTime time = receivedRdr.GetDateTime(2);
+
+ //            string senderName = GetNameFromId(senderId, con);
+ //            Console.WriteLine($"Sender Name: {senderName}");
+
+ //            if (!userMessages.ContainsKey(senderName))
+ //            {
+ //                userMessages[senderName] = new List<(string, string, string)>();
+ //            }
+ //            userMessages[senderName].Add((message, "Received", senderId, time.ToString("yyyy-MM-dd HH:mm:ss")));
+ //        }
+
+ //        con.Close();
+ //    }
+ //    catch (Exception e)
+ //    {
+ //        // Handle exception
+ //        Console.WriteLine(e.Message);
+ //    }
+ //    return userMessages;
+ //}
+
+
+
+===========================================================
+
+
+ //[HttpGet("GetUserMessages")]
+ //[EnableCors("AllowOrigin")]
+ //public ActionResult<Dictionary<string, List<(string, string, string, string)>>> GetUserMessages(string uname)
+ //{
+ //    Dictionary<string, List<(string, string, string, string)>> userMessages = CRUD_ADO.CRUD.GetUserMessages(uname);
+    
+ //    return userMessages;
+ //}
